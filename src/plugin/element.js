@@ -1,7 +1,4 @@
 import Vue from 'vue'
-import App from './App.vue'
-import store from '@/store'
-import ElementUI from 'element-ui';
 import {
   Pagination,
   Dialog,
@@ -169,19 +166,3 @@ Vue.prototype.$confirm = MessageBox.confirm;
 Vue.prototype.$prompt = MessageBox.prompt;
 Vue.prototype.$notify = Notification;
 Vue.prototype.$message = Message;
-
-// 封装请求部分
-import axios from 'axios'
-axios.defaults.baseURL = "http://localhost:8080/api/"
-axios.interceptors.request.use(config => {
-  //为请求头对象，添加Token验证的Authorization字段
-  config.headers.Authorization = window.sessionStorage.getItem('token')
-  return config
-})
-Vue.prototype.$http = axios
-
-
-new Vue({
-  render: h => h(App),
-  store
-}).$mount('#app')
